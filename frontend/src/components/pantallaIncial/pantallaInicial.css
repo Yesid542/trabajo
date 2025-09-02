@@ -1,0 +1,25 @@
+.body{
+    background-color: rgb(60, 193, 93);
+}
+
+.principal{
+    background-image: url('../public/IMG/Recurso 13.png');
+    background-size:cover ;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+}
+.cls-1 {
+        fill: #fff;
+      }
+.svg{
+    position: absolute;
+    height: 100vh;
+}
+.texto{
+    position: relative;
+    max-width: 400px;
+    margin-left:60vw;
+    margin-top: 50vh;
+
+}

@@ -1,14 +1,20 @@
-
-import './App.css'
-import TaskList from './taskList'
+// App.jsx
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import PantallaIncial from './components/pantallaIncial/pantallaInicial';
+import IniciaSesion from './components/inicioSesion/inicioSesion';
+import './App.css';
 
 function App() {
   return (
-    <div>
-      <h1>App con SQLite + Python + React</h1>
-      <TaskList />
-    </div>
-  )
+    <BrowserRouter>
+       <Routes>
+         <Route path="/" element={<PantallaIncial/>}/>
+         <Route path="/inciaSesion" element={<IniciaSesion/>}/>
+       </Routes>
+    </BrowserRouter>
+
+  );
 }
 
-export default App
+export default App;

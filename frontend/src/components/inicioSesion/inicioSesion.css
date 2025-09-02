@@ -1,0 +1,157 @@
+
+
+@font-face {
+  font-family:'MiFuente';
+  src: url('../public/fonts/WorkSans-Medium.ttf') format('truetype');
+}
+
+    
+.inicio {
+      background-image: url(./public/IMG/Recurso\ 13.png);
+      background-size: cover;
+       height: 100vh;
+       width: 100%;
+       display: flex;
+       align-items: center;
+       overflow: hidden;
+  font-family: sans-serif;
+  position: relative;
+
+
+      }
+.uno{
+    height: 100vh;
+    width: 50%;
+    
+}
+.cls-1 {
+         fill: #ffffff;
+  position: relative;
+  z-index: 1;
+
+      }  
+      .form-wrapper {
+  position: absolute;
+  right: 38%;
+  top: 45%;
+  transform: translateY(-56%);
+  z-index: 1;
+  color: rgb(255, 255, 255);
+  padding: 2rem;
+  width: 400px;
+  font-family:sans-serif;;
+
+}
+
+form input {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin-top: 3%;
+}
+
+form button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color:rgb(53, 179, 57);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-left: 3%;
+  margin-top: 10%;
+  margin-bottom: 3%;
+  color: #026634;
+  font-size: 20px;
+  font-weight:bold;
+}
+#ini{
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 53px;
+    margin-bottom: 80px;
+}
+#recordar{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+#crea{
+   text-decoration: none;
+    color: rgb(58, 169, 53);
+    z-index: 3;
+    margin-left: -52vw;
+    transform: translateY(40vh);
+  
+    
+}
+.fondo{
+  position: absolute;
+  z-index: 1;
+}
+.cls-2 {
+  fill: #fadb02;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  
+      }
+
+
+.cls-3 {
+        fill: #026634;
+        border: solid;
+      }
+.cls-4 {
+        fill:  #026634;
+        border: solid;
+      }
+.Nombre{
+  position: relative;
+  z-index:3;
+  left: 0;
+  transform: translateY(220%);
+
+  margin-left: 67vw;
+}
+.cls-6{
+  fill: #3aa935;
+}
+.input-email {
+  position: relative;
+  width: 402px;
+}
+
+.input-icon-email {
+  position: absolute;
+  top: 50%;
+  left: 385px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.input-wrapper input {
+  width: 100%;
+
+  height: 35px;
+  box-sizing: border-box;
+}
+
+/*---------------------------------------*/
+
+.input-password {
+  position: relative;
+  width: 402px;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  right: 0.1px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
