@@ -8,6 +8,8 @@ __pycache__/
 dist/
 build/
 *.whl
+pip-log.txt
+pip-delete-this-directory.txt
 
 # 🧪 Entornos virtuales
 venv/
@@ -70,3 +72,6 @@ instance/
 # 🚀 Firebase (si usas integración)
 firebase-debug.log
 .firebaserc
+
+# 📊 Jupyter (si usas notebooks)
+.ipynb_checkpoints/
