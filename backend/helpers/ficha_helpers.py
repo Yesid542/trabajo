@@ -1,6 +1,24 @@
 # helpers/ficha_helpers.py
 from .database_helpers import ejecutar_consulta
 
+def validar_ficha(respuesta):
+    try:
+        consulta = ejecutar_consulta("SELECT ficha FROM ficha")
+    except Exception as e:
+        raise Exception(f"Error al obtener fichas: {str(e)}")
+    
+    if not respuesta or not respuesta.strip():
+        return "El campo no puede estar vacio"
+
+    for registro in consulta: 
+        if 'ficha' in registro: 
+            if registro['ficha'] == respuesta:
+                return registro['ficha']
+        elif registro[0] == respuesta: 
+            return registro[0]
+    return None
+
+
 def obtener_todas_fichas():
     """
     Obtiene todas las fichas de la base de datos

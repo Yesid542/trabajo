@@ -35,7 +35,6 @@ def init_db():
                 contrasena TEXT NOT NULL,
                 tipoDocumento TEXT NOT NULL,
                 numeroDocumento TEXT NOT NULL,
-                imagenFirebasePath TEXT NOT NULL,
                 FOREIGN KEY (idFicha) REFERENCES ficha(idFicha) ON DELETE CASCADE
             )
         ''')

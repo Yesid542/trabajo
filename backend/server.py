@@ -1,22 +1,29 @@
+from flask import Flask, session
 from flask import Flask, jsonify, request, g
 from database import get_db, init_db, close_db
+from flask_cors import CORS
 from helpers import (
     obtener_todas_fichas,
     crear_ficha,
     obtener_ficha_por_id,
     actualizar_ficha,
     eliminar_ficha,
-    buscar_fichas_por_texto
+    buscar_fichas_por_texto,
+    validar_ficha
 )
 from helpers import (
+    verify_user_credentials,
+    get_user_by_email,
     crear_usuario,
     obtener_todos_usuarios,
     obtener_usuario_por_id,
-    obtener_usuario_por_correo,
+    obtener_usuario_por_documento,
     actualizar_usuario,
     eliminar_usuario,
     obtener_usuarios_por_ficha,
-    buscar_usuarios_por_nombre
+    buscar_usuarios_por_nombre,
+    validar_usuario_data,
+    validar_correo
 )
 from helpers import (
     crear_evaluacion,
@@ -117,11 +124,52 @@ from helpers import (
     obtener_recursos_recientes,
     validar_recurso_biblioteca,
 )
+from middleware.authMiddleware import login_required, get_current_user
+
+
+#--------------------------------------------------- Autenticación------------------------------------------------#
+app = Flask(__name__)
+app.secret_key ='innovemsennovacegafe2025'
+CORS(app)
+
+@app.route('/api/auth/login', methods=['POST'])
+def login():
+    # Usa tu usuarios_helpers.py para verificar credenciales
+    from helpers.usuarios_helpers import verify_user_credentials
+    
+    data = request.get_json()
+    user = verify_user_credentials(data['correo'], data['contrasena'])
+    
+    if user:
+        session['email'] = user['correo']
+        return jsonify({'message': 'Login exitoso', 'user': user})
+    else:
+        return jsonify({'error': 'Credenciales inválidas xd'}), 401
+
+@app.route('/api/auth/logout', methods=['POST'])
+def logout():
+    session.clear()
+    return jsonify({'message': 'Sesión cerrada'})
+
+@app.route('/api/auth/check', methods=['GET'])
+def check_auth():
+    user = get_current_user()
+    return jsonify({'authenticated': user is not None, 'user': user})
+
+# 🛡️ Ejemplo de ruta protegida (usa tu lógica existente + middleware)
+@app.route('/api/perfil', methods=['GET'])
+@login_required  # 🔐 Middleware de autenticación
+def perfil():
+    # Usa tus helpers existentes
+    from helpers.usuarios_helpers import get_user_profile
+    user_profile = get_user_profile(get_current_user()['id'])
+    return jsonify(user_profile)
+
 
 #---------------------------------------------- Fichas-------------------------------------------------------------#
 
 
-app = Flask(__name__)
+
 
 # Inicializa la BD al iniciar la aplicación (reemplaza before_first_request)
 with app.app_context():
@@ -131,9 +179,26 @@ with app.app_context():
 def teardown_appcontext(exception):
     close_db()
 
+
 @app.route("/api/data")
 def get_data():
     return jsonify({"message": "Hola desde Python!"})
+
+@app.route('/api/fichas/valida/<string:ficha>', methods=['GET'])
+def validar_ficha_en_bd(ficha):
+    try:
+        resultado = validar_ficha(ficha)
+        
+        if resultado:
+            return jsonify({"existe":True})
+        else:
+            return jsonify(False)
+            
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
 
 @app.route('/api/fichas', methods=['GET'])
 def get_fichas():

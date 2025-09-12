@@ -1,0 +1,128 @@
+
+
+.areaM{
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../../../public/IMG/registra.jpg');
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+}
+.formulario{
+    height: 70vh;
+    width: 40vw;
+    
+    margin-top: 14vh;
+
+}
+.ingresa{
+    margin-top: 1vh;
+    height: 35vh;
+    
+    position: relative;
+} 
+
+.regi{
+    display: flex;
+    
+    width: 100%;
+    position: relative;
+}
+
+.col{
+    flex: 1;
+    height: 35vh;
+    padding-left:0.4vw;
+    
+
+}
+.inText{
+    width:30vh;
+}
+.inSelect{
+  margin-top: 1.5vh;
+  width: 33vh;
+  height: 4.2vh;
+  border-radius: 18px;
+  margin-bottom: 1.5vh;
+}
+label{
+    color: white;
+}
+.guardar{
+    margin-top: 38vh;
+    margin-left: 15vw;
+    border-radius: 12px;
+    height: 40px;
+    width: 160px;
+    color: rgb(251, 251, 251);
+    background-color: rgb(32, 84, 32);
+    border: none;
+    position: absolute;
+    font-size: 15px;
+}
+.tituloR{
+    
+    font-size: 145px;
+    margin-top: 0;
+    color: rgb(35, 82, 35);
+    
+    margin-bottom: 40px;
+}
+.logoR{
+    width: 300px;
+    margin-left: 400px;
+    margin-top: -70px;
+}
+@media (max-width: 1500px) {
+  .guardar {
+    margin-top:40vh;
+    margin-left: 24vh;
+    font-size: 15px;
+  }
+}
+@media (max-width: 1500px) {
+  .formulario {
+    margin-top:9vh;
+  }
+}
+@media (max-height: 900px) {
+  .guardar {
+    margin-top:47vh;
+    margin-left: 24vh;
+    font-size: 15px;
+  }
+}
+@media (max-height: 900px) {
+  .tituloR {
+    font-size:105px;
+  }
+}
+@media (max-height: 900px) {
+  .logoR {
+    margin-left:285px;
+    width: 220px;
+  }
+}
+
+.cls-1 {
+        fill: #fadb02;
+      }
+
+      .cls-2 {
+        fill: #026634;
+      }
+
+      .cls-3 {
+        fill: #245426;
+      }
+.appR{
+    margin-left: 16vw;
+    width: 100px;
+}
+@media (max-height:900px){
+    .appR{
+        width: 50px ;
+        margin-left: 20vw;
+    }
+}

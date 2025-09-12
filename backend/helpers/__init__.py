@@ -6,13 +6,15 @@ from .ficha_helpers import (
     obtener_ficha_por_id,
     actualizar_ficha,
     eliminar_ficha,
-    buscar_fichas_por_texto
+    buscar_fichas_por_texto,
+    validar_ficha
 )
 from .usuarios_helpers import (
+    verify_user_credentials,
+    get_user_by_email,
     crear_usuario,
     obtener_todos_usuarios,
     obtener_usuario_por_id,
-    obtener_usuario_por_correo,
     obtener_usuario_por_documento,
     actualizar_usuario,
     eliminar_usuario,

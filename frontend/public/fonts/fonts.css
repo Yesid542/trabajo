@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'WorkSans-Medium';
+    src: url('./WorkSans-Medium.ttf') format('truetype');
+}
+@font-face {
+    font-family: WorkSans-Bold;
+    src: url('./WorkSans-Bold.ttf') format('truetype');
+}

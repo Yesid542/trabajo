@@ -1,0 +1,80 @@
+.principal{
+    height: 100vh;
+    width: 100vw;
+    background-image: url(../../../public/IMG/Fondologo.jpg);
+    background-size: cover;
+    position: relative;
+}
+
+.sombra{
+    width: 30vw;
+    position:absolute;
+    margin-left: 35vw;
+    margin-top: 8vh;
+}
+.logo{
+    width: 22vw;
+    position: relative;
+    margin-left: 38.8vw;
+    margin-top: 18vh;
+}
+.cls-1 {
+        fill: #fadb02;
+      }
+.nombre{
+    margin-top: 90px;
+    margin-left: 25vw;
+    filter: drop-shadow(8px 2px 20px #2e2e2e);
+
+}
+.cargar{
+    position: absolute;
+    margin-top:35vh;
+    margin-left: -32vw;
+
+}
+.cargar2{
+    position: absolute;
+    margin-top:35vh;
+    margin-left: -27vw;
+}
+.cargar3{
+    position: absolute;
+    margin-top:35vh;
+    margin-left: -22vw;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+}
+
+.cargar, .cargar2, .cargar3 {
+  animation: pulse 1.2s infinite ease-in-out;
+  transform-origin: center;
+}
+
+/* Delays para que lo hagan uno por uno */
+.cargar {
+  animation-delay: 0s;
+}
+.cargar2 {
+  animation-delay: 0.2s;
+}
+.cargar3 {
+  animation-delay: 0.4s;
+}
+.version{
+    font-family: sans-serif;
+    color: whitesmoke;
+    margin-top: 100px;
+    margin-left: 10px;
+}
+
+

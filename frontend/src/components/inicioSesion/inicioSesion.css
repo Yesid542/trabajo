@@ -24,7 +24,7 @@
     width: 50%;
     
 }
-.cls-1 {
+.cls-60 {
          fill: #ffffff;
   position: relative;
   z-index: 1;
@@ -83,7 +83,7 @@ form button {
    text-decoration: none;
     color: rgb(58, 169, 53);
     z-index: 3;
-    margin-left: -52vw;
+    margin-left: -980px;
     transform: translateY(40vh);
   
     
@@ -92,7 +92,7 @@ form button {
   position: absolute;
   z-index: 1;
 }
-.cls-2 {
+.cls-100 {
   fill: #fadb02;
   position: absolute;
   top: 0;

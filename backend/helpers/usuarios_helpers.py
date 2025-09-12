@@ -1,6 +1,37 @@
 # helpers/usuarios_helpers.py
 from .database_helpers import ejecutar_consulta
 import re
+from werkzeug.security import generate_password_hash, check_password_hash
+
+# Agregar estas funciones si no existen:
+
+def verify_user_credentials(correo, contrasena_plana):
+    """
+    Verifica las credenciales de un usuario
+    """
+    try:
+        # Buscar usuario por correo
+        query = "SELECT * FROM usuarios WHERE correo = ?"
+        resultados = ejecutar_consulta(query, [correo])
+        
+        if resultados and len(resultados) > 0:
+            usuario = resultados[0]  # Tomar el primer resultado            
+
+            if check_password_hash(usuario['contrasena'], contrasena_plana):
+                return usuario  # Credenciales correctas
+        
+        return None  # Usuario no existe o contraseña incorrecta
+        
+    except Exception as e:
+        print(f"Error verificando usuario: {e}")
+        return None
+
+def get_user_by_email(email):
+    """Obtener usuario por email (usa tu database_helpers)"""
+    from database_helpers import query_db
+    return query_db('SELECT * FROM users WHERE email = ?', [email], one=True)
+
+
 
 def validar_correo(correo):
     """Valida que el correo tenga un formato válido"""
@@ -49,11 +80,11 @@ def validar_usuario_data(data, es_actualizacion=False):
     return data
 
 def crear_usuario(data):
-    """
-    Crea un nuevo usuario en la base de datos
-    """
     try:
         data = validar_usuario_data(data)
+        
+        # 🔐 GENERAR HASH DE LA CONTRASEÑA (ANTES de guardar)
+        contrasena_hash = generate_password_hash(data['contrasena'])
         
         query = """
             INSERT INTO usuarios 
@@ -68,16 +99,17 @@ def crear_usuario(data):
                 data['nombre'].strip(),
                 data['apellido'].strip(),
                 data['correo'],
-                data['contrasena'],  # En producción, esto debería estar hasheado
+                contrasena_hash,  # ✅ Ahora guardamos el HASH, no el texto plano
                 data['tipoDocumento'].upper(),
                 data['numeroDocumento'].strip()
             )
         )
         
         return nuevo_id
-        
     except Exception as e:
-        raise Exception(f"Error al crear usuario: {str(e)}")
+        print(f"Error creando el usuario: {e}")
+        return None
+
 
 def obtener_todos_usuarios():
     """
@@ -108,17 +140,6 @@ def obtener_usuario_por_id(usuario_id):
         return resultados[0] if resultados else None
     except Exception as e:
         raise Exception(f"Error al obtener usuario por ID: {str(e)}")
-
-def obtener_usuario_por_correo(correo):
-    """
-    Obtiene un usuario por su correo electrónico
-    """
-    try:
-        correo_validado = validar_correo(correo)
-        resultados = ejecutar_consulta("SELECT * FROM usuarios WHERE correo = ?", (correo_validado,))
-        return resultados[0] if resultados else None
-    except Exception as e:
-        raise Exception(f"Error al obtener usuario por correo: {str(e)}")
 
 def obtener_usuario_por_documento(tipo_documento, numero_documento):
     """

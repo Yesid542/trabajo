@@ -1,0 +1,74 @@
+.body{
+    background-color: rgb(60, 193, 93);
+}
+
+.principal{
+    background-image: url('../public/IMG/Recurso 13.png');
+    background-size:cover ;
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+}
+.cls-9 {
+        fill: #fff;
+      }
+.svg{
+    position: absolute;
+    height: 100vh;
+}
+.texto{
+    position: relative;
+    max-width: 750px;
+    margin-left:48vw;
+    margin-top: 50vh;
+    font-family: sans-serif;
+    line-height: 2.0;
+    color: #359f42;    
+
+}
+
+.texto::first-letter{
+    font-size: 30px;
+}
+
+.textoLogo{
+    position:absolute;
+    margin-left: 80px;
+    margin-top: 115px;
+}
+
+ .logoDigital{
+    position: absolute;
+    margin-top: 220px;
+    margin-left: 80px;
+ }
+
+ .cls-1 {
+        fill: #1d1d1b;
+  }
+
+  .cls-10 {
+    fill: #fdfdfd;
+    stroke: #100f0f;
+    stroke-miterlimit: 10;
+    stroke-width: 5.18px;
+  }
+
+  .cls-20 {
+    fill: #090909;
+  }
+
+  .cls-4 {
+    fill: #00c8ff;
+  }
+  .cls-7{
+    fill: #f7ff02;
+  }
+  .cls-30 {
+        fill: #000000;
+      }
+.logoSena{
+    position: absolute;
+    margin-top: 405px;
+    margin-left: 80px;
+}
