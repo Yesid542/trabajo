@@ -3,7 +3,7 @@ from .database_helpers import ejecutar_consulta
 
 def validar_ficha(respuesta):
     try:
-        consulta = ejecutar_consulta("SELECT ficha FROM ficha")
+        consulta = ejecutar_consulta("SELECT * FROM ficha")
     except Exception as e:
         raise Exception(f"Error al obtener fichas: {str(e)}")
     
@@ -13,7 +13,7 @@ def validar_ficha(respuesta):
     for registro in consulta: 
         if 'ficha' in registro: 
             if registro['ficha'] == respuesta:
-                return registro['ficha']
+                return registro['idFicha']
         elif registro[0] == respuesta: 
             return registro[0]
     return None

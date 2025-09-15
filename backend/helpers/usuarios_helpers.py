@@ -81,7 +81,9 @@ def validar_usuario_data(data, es_actualizacion=False):
 
 def crear_usuario(data):
     try:
+        
         data = validar_usuario_data(data)
+        
         
         # 🔐 GENERAR HASH DE LA CONTRASEÑA (ANTES de guardar)
         contrasena_hash = generate_password_hash(data['contrasena'])

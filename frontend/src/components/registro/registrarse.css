@@ -40,9 +40,9 @@
     width:30vh;
 }
 .inSelect{
-  margin-top: 1.5vh;
-  width: 33vh;
-  height: 4.2vh;
+  margin-top: 1.3vh;
+  width: 17vw;
+  height: 6.3vh;
   border-radius: 18px;
   margin-bottom: 1.5vh;
 }
@@ -79,6 +79,12 @@ label{
     margin-top:40vh;
     margin-left: 24vh;
     font-size: 15px;
+  }}
+@media (max-width: 1500px) {
+  .guardar {
+    margin-top:40vh;
+    margin-left: 24vh;
+    font-size: 15px;
   }
 }
 @media (max-width: 1500px) {
@@ -87,8 +93,13 @@ label{
   }
 }
 @media (max-height: 900px) {
+  .formulario {
+    margin-top:5vh;
+  }
+}
+@media (max-height: 900px) {
   .guardar {
-    margin-top:47vh;
+    margin-top:51vh;
     margin-left: 24vh;
     font-size: 15px;
   }

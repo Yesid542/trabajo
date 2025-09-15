@@ -190,7 +190,7 @@ def validar_ficha_en_bd(ficha):
         resultado = validar_ficha(ficha)
         
         if resultado:
-            return jsonify({"existe":True})
+            return jsonify({'id':resultado})
         else:
             return jsonify(False)
             
@@ -369,6 +369,11 @@ def add_usuario():
     try:
         data = request.get_json()
         nuevo_id = crear_usuario(data)
+
+        if nuevo_id is None:
+            raise ValueError("No se pudo crear el usuario. Verifica los datos enviados.")
+
+
         return jsonify({
             'status': 'success',
             'message': 'Usuario creado exitosamente',

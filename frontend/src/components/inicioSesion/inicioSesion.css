@@ -155,3 +155,12 @@ form button {
   transform: translateY(-50%);
   cursor: pointer;
 }
+@media (max-height:1000px) {
+  .Nombre{
+     transform: translateY(150%);
+     margin-left: 60vw;
+  }
+  #crea{
+    margin-left: -850px;
+  }
+}

@@ -5,14 +5,17 @@ import { useState } from "react";
 
 
 function Registrar(){
-   const [ficha, setFicha] = useState('');
+  const [idFicha, setIdFicha] = useState(null);
+  const [ficha, setFicha] = useState('');
   const [errorFicha, setErrorFicha] = useState('');
   const [fichaVerified, setFichaVerified] = useState(false);
+  const [contrasenaVerified, setContrasenaVerified] =useState('');
   
 
   // Función para verificar la ficha
   const verificarFicha = async (numeroFicha) => {
     setErrorFicha('');
+    setIdFicha(null);
     
     try {
       const response = await fetch(`http://127.0.0.1:5000/api/fichas/valida/${numeroFicha}`, {
@@ -29,12 +32,11 @@ function Registrar(){
       const data = await response.json();
       console.log("Respuesta del servidor:", data); 
       
-      if (data.existe) {
+      if (data.id) {
         setErrorFicha('');
         setFichaVerified(true);
-        return true;
-      } else {
-        setErrorFicha('La ficha ingresada no existe');
+        setIdFicha(data.id);
+      } else {        
         setFichaVerified(false);
         return false;
       }
@@ -46,40 +48,77 @@ function Registrar(){
     }
   };
 
-  const crearUsuario= async(nombre, apellido, tipoDocumento, documento,idFicha, correo, contrasena ) => {
+  const crearUsuario= async(nombre,apellido,correo,contrasena,tipoDocumento,documento, idFicha) => {
+    
+
     try{
+
+      console.log(nombre,apellido,tipoDocumento,documento,correo,contrasena,idFicha)
+
       const respuesta = await fetch(`http://127.0.0.1:5000/api/usuarios`,{
         method:'POST',
         headers: {
           'Content-Type':'application/json',
-        },
+        },body: JSON.stringify({
+          nombre:nombre,
+          apellido:apellido,
+          correo:correo,
+          contrasena:contrasena,
+          tipoDocumento:tipoDocumento,
+          numeroDocumento:documento,
+          idFicha:idFicha
+      })
+
       });
 
-      if (!respuesta.ok) {
-        throw new Error('Error en la respuesta del servidor');
+       const data = await respuesta.json();
+    console.log('Respuesta del servidor:', data);
+      } catch (error) {
+    console.error('Error al crear usuario:', error);
       }
-
-    }catch{
-
-    }
-
   }
 
   
   // Manejar cambio en el input
  const handleSubmit = async (e) => {
+  setContrasenaVerified('');
+  setIdFicha('')
   e.preventDefault();
+  const nombre = document.getElementById('nombre').value;
+  const apellido = document.getElementById('apellido').value;
+  const correo = document.getElementById('email').value;
+  const contrasenaInicial = document.getElementById('contrasena').value;
+  const confirma = document.getElementById('confirma').value;
+  const tipoDocumento = document.getElementById('tipo').value;
+  const documento = document.getElementById('documento').value;
 
+
+  if(ficha==''){
+    if (contrasenaInicial == confirma){
+    const contrasena = contrasenaInicial
+     crearUsuario(nombre,apellido,correo,contrasena,tipoDocumento,documento,idFicha);
+    }
+    else {
+      setContrasenaVerified('Las contraseñas no coinciden')
+    }
+  }else{
   const fichaSanitizada = ficha.replace(/\D/g, '');
-
-  const esValida = await verificarFicha(fichaSanitizada);
-
-  if (esValida) {
-    console.log("ficha bien");
-  } 
-
+  const fichaValida=verificarFicha(fichaSanitizada);
+    if (fichaValida && contrasenaInicial == confirma){
+      if(fichaVerified==false){
+          setErrorFicha('La ficha ingresada no existe');
+      }else{
+        const contrasena = contrasenaInicial;
+        crearUsuario(nombre,apellido,correo,contrasena,tipoDocumento,documento,idFicha);
+      }
+      
+    }
+    else {
+    setContrasenaVerified('Las contraseñas no coinciden')
+  }
+}
+  
 };
-
     return(
         <div className="areaM" style={{fontFamily:'WorkSans-Medium'}} >
             <div className="formulario">
@@ -114,13 +153,14 @@ function Registrar(){
                     <form onSubmit={handleSubmit} className="regi" action="">
                         <div className="col">
                             <label htmlFor="">Nombre</label>
-                            <input type="text" className="inText" required />
+                            <input type="text" id="nombre" className="inText" required />
                             <label htmlFor="">Tipo de Documento</label>
-                            <select className="inSelect" name="" id="">
-                              <option value="">CC</option>
-                              <option value="">TI</option>
-                              <option value="">CE</option>
-                              <option value="">PASAPORTE</option>
+                            <select className="inSelect" id="tipo" name="tipo" required>
+                              <option value="">Selecciona</option>
+                              <option value="CC">CC</option>
+                              <option value="TI">TI</option>
+                              <option value="CE">CE</option>
+                              <option value="PASAPORTE">PASAPORTE</option>
                             </select><br />
                             <label htmlFor="">Ficha</label>
                              <input 
@@ -128,37 +168,36 @@ function Registrar(){
                                id="ficha"
                                className={`inText ${errorFicha ? 'error' : ''} ${fichaVerified ? 'success' : ''}`}
                                value={ficha}
-                               onChange={(e) => setFicha(e.target.value.replace(/\D/g, ''))}
+                               onChange={(e) => setFicha(e.target.value)}
                                maxLength={10} // Ajusta según necesidad
-                             />
-                             
+                             />                           
                               {errorFicha && (
                               <span className={`error-text ${fichaVerified ? 'success-text' : ''}`}>
                                 {errorFicha}
                               </span>
                             )}
                             <label htmlFor="">Crea tu contraseña</label>
-                            <input type="text" className="inText" />
+                            <input type="text" className="inText" id="contrasena" required/>
                         </div>
                         <div className="col">
                             <label htmlFor="">Apellido</label>
-                            <input type="text" className="inText" required />
+                            <input type="text" className="inText" id="apellido" required />
                             <label htmlFor="">N° Documento</label>
-                            <input type="text" className="inText" required/>
+                            <input type="text" className="inText" id="documento" required/>
                             <label htmlFor="">Email</label>
-                            <input type="text" className="inText"  required/>
+                            <input type="text" className="inText" id="email" required/>                            
+                            {contrasenaVerified && (
+                              <span>
+                                {contrasenaVerified}
+                              </span>
+                            )}
                             <label htmlFor="">Confirma tu contraseña</label>
-                            <input type="text" className="inText" required />
+                            <input type="text" className="inText" id="confirma" required />
                         </div>
-
                         <button className="guardar"style={{fontFamily:'WorkSans-Medium' }} type="submit" >Crear Cuenta</button>
                     </form>
-
                 </div>
-
-            
             </div>
-
         </div>
     )
   }
