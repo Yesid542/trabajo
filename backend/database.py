@@ -71,7 +71,6 @@ def init_db():
             CREATE TABLE IF NOT EXISTS modulo(
                 idModulo INTEGER PRIMARY KEY AUTOINCREMENT,
                 nombre TEXT NOT NULL,
-                descripcion TEXT NOT NULL,
                 dificultad TEXT NOT NULL
             )
         ''')

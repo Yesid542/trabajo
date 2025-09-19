@@ -5,6 +5,11 @@ import { data } from "react-router-dom";
 
 function PaginaPrincipal(){
   const introduccionRef = useRef(null);
+  const fundamentosRef = useRef(null);
+  const estructurasDatosIRef = useRef(null);
+  const estructurasDatosIIRef = useRef(null);
+  const estructurasControlRef = useRef(null);
+  
 
   
 useEffect(() => {
@@ -26,7 +31,7 @@ useEffect(() => {
               if (!res.ok) {
                 throw new Error(`Error HTTP: ${res.status}`); 
               }
-              return res.json(); // ← esto sigue siendo una promesa
+              return res.json(); 
             })
           .then(dataModulos=>{
             console.log('respuesta',dataModulos);
@@ -35,7 +40,21 @@ useEffect(() => {
             if( introduccionRef.current && modulo.nombre == introduccionRef.current.id){
               const imagenIntroduccion = ruta.rutaSupabase; 
               introduccionRef.current.style.backgroundImage=`url(${imagenIntroduccion})`
+              } 
+            if(fundamentosRef.current && modulo.nombre == fundamentosRef.current.id){
+              const imagenFundamentos = ruta.rutaSupabase; 
+              fundamentosRef.current.style.backgroundImage=`url(${imagenFundamentos})`
               }
+            if(estructurasDatosIRef.current && modulo.nombre == estructurasDatosIRef.current.id){
+              const imagenEstructuraDatosI = ruta.rutaSupabase; 
+              estructurasDatosIRef.current.style.backgroundImage=`url(${imagenEstructuraDatosI})`
+              const imagenEstructuraDatosII = ruta.rutaSupabase; 
+              estructurasDatosIIRef.current.style.backgroundImage=`url(${imagenEstructuraDatosII})`
+              }
+            if(estructurasControlRef.current && modulo.nombre == estructurasControlRef.current.id){
+              const imagenEstructurasControl = ruta.rutaSupabase; 
+              estructurasControlRef.current.style.backgroundImage=`url(${imagenEstructurasControl})`
+            }
           }
           )
           .catch(error => {
@@ -137,10 +156,10 @@ return(
               <div className="introduccion modulo" id="Introduccion" ref={introduccionRef}>
                 <div className="titulo-modulo">Introduccion</div>
               </div>
-              <div className="modulo" ></div>
-              <div className="modulo" ></div>
-              <div className="modulo" ></div>
-              <div className="modulo" ></div>
+              <div className="modulo" id="Fundamentos" ref={fundamentosRef} ></div>
+              <div className="modulo" id="EstructurasDatosI" ref={estructurasDatosIRef} ></div>
+              <div className="modulo" id="EstructurasDatosII" ref={estructurasDatosIIRef}  ></div>
+              <div className="modulo" id="EstructurasControl" ref={estructurasControlRef}  ></div>
             </div>
             <div className="etiquetas">
               <p className="etiqueta">Nivel 2 <strong id="nivel">(Intermedio)</strong> </p>
