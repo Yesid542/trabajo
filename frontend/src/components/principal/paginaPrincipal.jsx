@@ -156,17 +156,25 @@ return(
               <div className="introduccion modulo" id="Introduccion" ref={introduccionRef}>
                 <div className="titulo-modulo">Introduccion</div>
               </div>
-              <div className="modulo" id="Fundamentos" ref={fundamentosRef} ></div>
-              <div className="modulo" id="EstructurasDatosI" ref={estructurasDatosIRef} ></div>
-              <div className="modulo" id="EstructurasDatosII" ref={estructurasDatosIIRef}  ></div>
-              <div className="modulo" id="EstructurasControl" ref={estructurasControlRef}  ></div>
+              <div className="modulo" id="Fundamentos" ref={fundamentosRef} >
+                <div className="titulo-modulo">Fundamentos del lenguaje</div>
+              </div>
+              <div className="modulo" id="EstructurasDatosI" ref={estructurasDatosIRef} >
+                <div className="titulo-modulo">Estructuras de datos I</div>
+              </div>
+              <div className="modulo" id="EstructurasDatosII" ref={estructurasDatosIIRef}  >
+                <div className="titulo-modulo">Estructuras de datos II</div>
+              </div>
+              <div className="modulo" id="EstructurasControl" ref={estructurasControlRef}  >
+                <div className="titulo-modulo">Estructuras de Control I</div>
+              </div>
             </div>
             <div className="etiquetas">
               <p className="etiqueta">Nivel 2 <strong id="nivel">(Intermedio)</strong> </p>
             </div>
             <div className="modulos">
               <div className="introduccion modulo" >
-                <div className="titulo-modulo">Introduccion</div>
+                <div className="titulo-modulo">Estructuras de control II</div>
               </div>
               <div className="modulo" ></div>
               <div className="modulo" ></div>
