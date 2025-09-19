@@ -42,7 +42,7 @@
 .inSelect{
   margin-top: 1.3vh;
   width: 17vw;
-  height: 6.3vh;
+  height: 4.3vh;
   border-radius: 18px;
   margin-bottom: 1.5vh;
 }
@@ -103,6 +103,13 @@ label{
     margin-left: 24vh;
     font-size: 15px;
   }
+  .inSelect{
+  margin-top: 1.3vh;
+  width: 17vw;
+  height: 6.0vh;
+  border-radius: 18px;
+  margin-bottom: 1.5vh;
+}
 }
 @media (max-height: 900px) {
   .tituloR {

@@ -16,7 +16,7 @@ def validar_ficha(respuesta):
                 return registro['idFicha']
         elif registro[0] == respuesta: 
             return registro[0]
-    return None
+    return None 
 
 
 def obtener_todas_fichas():

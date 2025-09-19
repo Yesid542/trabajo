@@ -155,7 +155,7 @@ form button {
   transform: translateY(-50%);
   cursor: pointer;
 }
-@media (max-height:1000px) {
+@media (max-height:900px) {
   .Nombre{
      transform: translateY(150%);
      margin-left: 60vw;

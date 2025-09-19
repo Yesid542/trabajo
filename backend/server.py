@@ -142,9 +142,9 @@ def login():
     
     if user:
         session['email'] = user['correo']
-        return jsonify({'message': 'Login exitoso', 'user': user})
+        return jsonify({'true':True})
     else:
-        return jsonify({'error': 'Credenciales inválidas xd'}), 401
+        return jsonify({'false': False})
 
 @app.route('/api/auth/logout', methods=['POST'])
 def logout():

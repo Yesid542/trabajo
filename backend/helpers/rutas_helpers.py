@@ -61,9 +61,8 @@ def obtener_ruta_por_id(id_ruta):
     """
     try:
         resultados = ejecutar_consulta(
-            '''SELECT r.*, t.nombre as nombre_tabla 
+            '''SELECT r.*
                FROM rutas r 
-               LEFT JOIN tablas t ON r.idTablas = t.nombre
                WHERE r.id = ?''',
             (id_ruta,)
         )
@@ -96,12 +95,9 @@ def obtener_todas_rutas():
     """Obtiene todas las rutas con información de la tabla"""
     try:
         resultados = ejecutar_consulta('''
-            SELECT r.*, t.nombre as nombre_tabla 
-            FROM rutas r 
-            LEFT JOIN tablas t ON r.idTablas = t.nombre
-            ORDER BY r.creado_en DESC
+            SELECT * 
+            FROM rutas
         ''')
-        
         # Asegurar que siempre retornamos una lista
         return resultados if isinstance(resultados, list) else []
         

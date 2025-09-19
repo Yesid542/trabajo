@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow,Menu } = require('electron')
 const path = require('path')
 
 let mainWindow
@@ -13,8 +13,11 @@ function createWindow() {
       nodeIntegration: false,
       contextIsolation: true,
     },
+
     icon: iconPath
   })
+
+
 
   // Cargar el frontend de Vite en desarrollo
   mainWindow.loadURL('http://localhost:5173')

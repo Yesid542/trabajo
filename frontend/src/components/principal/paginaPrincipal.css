@@ -1,0 +1,477 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.cuerpo {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+/* Barra superior */
+.superior {
+  background-color: #66cc33;
+  height: 6vh;
+  filter: drop-shadow(8px 0px 10px rgba(0, 0, 0, 0.4));
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.logoSer {
+  width: 20vw;
+}
+
+.serkana {
+  margin-left: 50px;
+  margin-top: 20px;
+}
+
+.buscar {
+  position: relative;
+  display: inline-block;
+  width: 60vw;
+  display: flex;
+}
+
+#buscador {
+  margin-left: 12vw;
+  width: 730px;
+  height: 35px;
+  margin-top: 1vh;
+  border-radius: 20px;
+  border: none;
+  opacity: 0.7;
+  outline: none;
+  color: black;
+}
+
+.lupa {
+  position: absolute;
+  margin-top: 15px;
+  margin-left: 48vw;
+}
+
+.cls-110 {
+  fill: #245426;
+}
+
+.perfil {
+  width: 20vw;
+}
+
+.user {
+  height: 4vh;
+  width: 2.2vw;
+  border-radius: 5vw;
+  background-image: url(../../../public/ICONS/User.svg);
+  background-size: cover;
+  margin-top: 7px;
+  margin-left: 10vw;
+}
+
+/* Barra lateral */
+.lateral {
+  background-color: #66cc33;
+  width: 80px;
+  filter: drop-shadow(8px 0 10px rgba(0, 0, 0, 0.4));
+  transition: width 0.3s ease;
+  position: fixed;
+  top: 5vh; /* debajo del header */
+  left: 0;
+  height: calc(100vh - 5vh);
+  z-index: 9; 
+
+}
+
+/* Estilos comunes para iconos */
+.iconos, .icono, .logros, .ajustes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  border-radius: 10px;
+  transition: background-color 0.5s ease;
+}
+
+.iconos {
+  height: 70px;
+  margin-bottom: 4vh;
+}
+
+.icono {
+  height: 70px;
+  margin-top: 9.4vh;
+  margin-bottom: 4vh;
+}
+
+.home {
+  width: 3.7vw;
+}
+
+#aprendices, #instructores{
+  width: 4vh;
+}
+ #logros, #ajustes{
+  width: 3.5vh;
+ }
+
+.logros {
+  height: 70px;
+  margin-top: 35vh;
+  padding: 10px;
+}
+
+.ajustes {
+  margin-top: 2vh;
+  height: 70px;
+  padding: 10px;
+  padding-bottom: 30px;
+}
+
+.texto {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-family: 'WorkSans-Light';
+  font-size: 13px;
+  color: white;
+}
+
+/* Hover effects */
+.lateral:hover {
+  width: 110px;
+}
+
+.lateral:hover .texto {
+  opacity: 1;
+}
+
+.iconos:hover, .icono:hover, .logros:hover, .ajustes:hover {
+  background-color: rgb(187, 212, 178);
+  opacity: 1;
+  color: rgb(0, 0, 0);
+  
+}
+
+/* Layout principal */
+.layout {
+  display: flex;
+  flex: 1; /* ocupa todo el espacio restante debajo del header */
+  margin-top: 5vh; /* igual a la altura de .superior */
+  height: calc(100vh - 7vh);
+  overflow: hidden;
+
+}
+
+main {
+  flex: 1; /* ocupa el espacio restante al lado del aside */
+  background-color: #336633;
+  z-index: 0;
+  margin-left: 80px; /* igual al ancho de .lateral */
+  height: calc(100vh - 5vh);
+  overflow-y: auto;
+  
+  padding: 0px;
+}
+
+
+
+.filtro-primero{
+  margin-top: 30px;
+  margin-left: 30vw;
+  height: 30px;
+  width: 180px;
+  border-radius: 10px;
+  border: none;
+  font-family: 'WorkSans-light';
+  background-color: #5f9d60;
+  
+  color: white;
+  
+  }
+  .filtro{
+    height: 30px;
+    width: 180px;
+    margin-top: 30px;
+    margin-left: 60px;
+    border-radius: 10px;
+    border: none;
+    background-color:#5f9d60;
+    font-family: 'WorkSans-light';
+    color: white;
+  }
+
+.Bienvenida {
+  margin-top: 4.7vh;
+  height: 50px;
+  width: 60vw;
+  border-radius: 0px 25px 25px 0px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+}
+.estrella-bienvenida{
+  width: 40px;
+  margin-left: 10px;
+}
+
+.saludo{
+  font-family: 'JKAbode-demo';
+  margin-left: 20px;
+  font-size: 30px;
+}
+
+
+.grupo {
+ 
+  height: auto;
+  width: 99.%;
+  display: flex;
+  padding: 3vh;
+  
+}
+.reciente{
+  background-color: white;
+  height: 40vh;
+  width: 50vw;
+  border-radius: 20px;
+  background-image: url(../../../public/IMG/Introduccion.jpg);
+  filter: drop-shadow(8px 0 10px rgba(0, 0, 0, 0.4));
+  
+}
+.descripcion{
+  
+  height: 50vh;
+  width: 40vw;
+  margin-left: 1.5vw;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-items: end;
+  overflow: hidden;
+}
+
+.reciente {
+  position: relative;
+  width: 50vw;
+  height: 50vh;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 10px 13px rgba(0,0,0,0.2);
+  background-image: url('../../../public/IMG/Introduccion.jpg'); /* si tienes una imagen de fondo */
+  background-size: cover;
+  background-position: center;
+}
+
+/* Capa oscura al hacer hover */
+.reciente::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+/* Mostrar capa oscura al hacer hover */
+.reciente:hover::before {
+  opacity: 1;
+}
+
+/* Barra de progreso siempre visible */
+.barra_progreso {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.3);
+  z-index: 2;
+}
+
+/* Estrella oculta inicialmente */
+.estrella {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
+/* Mostrar estrella al hacer hover */
+.reciente:hover .estrella {
+  opacity: 1;
+}
+
+.progreso {
+  height: 100%;
+  background-color: #4caf50; /* Verde progreso */
+  transition: width 0.3s ease;
+}
+.titulo {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 10px;
+  font-family: 'JKAbode-demo';
+  font-size: 80px;
+  color: white;
+}
+
+
+.contenido {
+
+  display: flex;
+  flex-direction: column-reverse; /* 👈 Apila los <p> desde abajo */
+  justify-content: flex-start;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  overflow-y: auto;
+}
+#moduloDescripcion{
+  color: #66cc33;
+  font-family: 'WorkSans-light';
+}
+
+.etiquetas{
+  
+  height: 30px;
+  padding-left: 3vh;
+  display: flex;
+  align-items: center;
+
+}
+.etiqueta{
+  font-family: 'WorkSans-light';
+  font-weight:1000;
+  color: #66cc33;
+  font-size: 20px;
+}
+#nivel{
+  color: white;
+}
+.modulos{
+  margin-top: 2vh;
+  height: 17vh;
+  display: flex;
+  align-items: center;
+
+}
+.modulo {
+  position: relative;
+  width: 16.5vw;
+  height: 15vh;
+  margin-left:2vw;
+  border-radius: 16px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+  filter: drop-shadow(8px 0 6px rgba(0, 0, 0, 0.4));
+}
+
+.introduccion {
+  margin-left: 2vw;
+}
+
+/* Título oculto inicialmente */
+.titulo-modulo {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: rgb(71, 164, 45);
+  font-size: 1.2em;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+  font-family: 'WorkSans-light';
+  font-weight: bold;
+}
+
+/* Capa oscura al hacer hover */
+.modulo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 16px;
+  z-index: 1;
+}
+
+/* Hover: oscurece y muestra título */
+.modulo:hover::before {
+  opacity: 1;
+}
+
+.modulo:hover .titulo-modulo {
+  opacity: 1;
+}
+@media(max-height:900px){
+  .logros{
+    margin-top: 22vh;
+  }
+  .filtro-primero{
+    margin-left: 22vw;
+  }
+  #buscador{
+    height: 26px;
+    margin-left: 40px;
+  }
+  .lupa{
+    margin-top: 12px;
+    height: 20px;
+    margin-left: 57vw;
+  }
+  .serkana{
+    margin-top: 10px;
+  }
+  .user {
+    height: 4vh;
+    width: 2.5vw;
+    border-radius: 5vw;
+    background-image: url(../../../public/ICONS/User.svg);
+    background-size: cover;
+    margin-top: 7px;
+    margin-left: 10vw;
+  }
+}
+@media(max-width:1800px){
+  #buscador{
+    height: 26px;
+    margin-left: 90px;
+  }
+  .lupa{
+    margin-top: 12px;
+    height: 20px;
+    margin-left: 51vw;
+  }
+  .user {
+    height: 4.5vh;
+    width: 2.3vw;
+    border-radius: 5vw;
+    background-image: url(../../../public/ICONS/User.svg);
+    background-size: cover;
+    margin-top: 7px;
+    margin-left: 10vw;
+  }
+  .filtro-primero{
+    margin-left: 26vw;
+  }
+}

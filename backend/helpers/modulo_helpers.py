@@ -65,6 +65,7 @@ def obtener_todos_modulos():
     except Exception as e:
         raise Exception(f"Error al obtener módulos: {str(e)}")
 
+
 def obtener_modulo_por_id(modulo_id):
     """
     Obtiene un módulo específico por su ID

@@ -6,3 +6,11 @@
     font-family: WorkSans-Bold;
     src: url('./WorkSans-Bold.ttf') format('truetype');
 }
+@font-face {
+    font-family:'WorkSans-Light';
+    src: url('./WorkSans-Light.ttf') format('truetype');
+}
+@font-face {
+    font-family:'JKAbode-Demo';
+    src: url('./JKAbode-Demo.ttf') format('truetype');
+}

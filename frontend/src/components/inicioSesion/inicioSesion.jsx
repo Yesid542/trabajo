@@ -1,13 +1,16 @@
 // MiVentana.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './inicioSesion.css';
 import PasswordInput from '../mostrarContrasena/mostrarContrasena.jsx';
 import { Link} from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
+import '../../../public/fonts/fonts.css'
 
 function InicioSesion() {
+const navigate = useNavigate();
 
 const iniciarSesion = async(email,password)=>{
+  
    try{
       const servidor = await fetch(`http://127.0.0.1:5000/api/auth/login`,{
         method:'POST',
@@ -18,13 +21,17 @@ const iniciarSesion = async(email,password)=>{
           correo:email,
           contrasena:password})
    });
-
-    const data = await servidor.json();
-    console.log(data)
+       const data = await servidor.json();
+       if(data.true){
+         navigate('./principal')
+       }
+       if(data.false){
+         console.log("Paila socio")
+       }
     
 
     }catch(error) {
-    console.error('Error al crear usuario:', error);
+    console.error('Error al crear usuario:', error);  
    }
   }
 
