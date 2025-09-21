@@ -22,8 +22,6 @@ secrets.json
 config.yaml
 
 # 🗃️ Bases de datos y logs
-*.sqlite3
-*.db
 *.log
 *.bak
 *.tmp

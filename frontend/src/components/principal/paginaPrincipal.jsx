@@ -8,11 +8,23 @@ function PaginaPrincipal(){
   const fundamentosRef = useRef(null);
   const estructurasDatosIRef = useRef(null);
   const estructurasDatosIIRef = useRef(null);
-  const estructurasControlRef = useRef(null);
-  
+  const estructurasControlIRef = useRef(null);
+  const estructurasControlIIRef = useRef(null);
+  const descripcion = '';
+  const reciente = document.getElementById("reciente");
+  const textoDescripcion = document.getElementById("moduloDescripcion");
+  const opciones = document.querySelectorAll(".modulo");
+
+  opciones.forEach(opcion =>{
+    opcion.addEventListener("click", ()=> {
+      reciente.style.backgroundImage = `url(${opcion.dataset.img})`;
+      textoDescripcion.textContent = opcion.dataset.texto;
+    });
+})
 
   
 useEffect(() => {
+
     fetch('http://127.0.0.1:5000/api/rutas')
     .then(respuesta => {
       if (!respuesta.ok) {
@@ -39,7 +51,9 @@ useEffect(() => {
             const modulo = dataModulos.data;
             if( introduccionRef.current && modulo.nombre == introduccionRef.current.id){
               const imagenIntroduccion = ruta.rutaSupabase; 
-              introduccionRef.current.style.backgroundImage=`url(${imagenIntroduccion})`
+              const introduccion = document.getElementById("Introduccion");
+              introduccion.dataset.img = imagenIntroduccion;
+              introduccion.style.backgroundImage = `url(${introduccion.dataset.img})`
               } 
             if(fundamentosRef.current && modulo.nombre == fundamentosRef.current.id){
               const imagenFundamentos = ruta.rutaSupabase; 
@@ -51,9 +65,11 @@ useEffect(() => {
               const imagenEstructuraDatosII = ruta.rutaSupabase; 
               estructurasDatosIIRef.current.style.backgroundImage=`url(${imagenEstructuraDatosII})`
               }
-            if(estructurasControlRef.current && modulo.nombre == estructurasControlRef.current.id){
-              const imagenEstructurasControl = ruta.rutaSupabase; 
-              estructurasControlRef.current.style.backgroundImage=`url(${imagenEstructurasControl})`
+            if(estructurasControlIRef.current && modulo.nombre == estructurasControlIRef.current.id){
+              const imagenEstructurasControlI = ruta.rutaSupabase; 
+              estructurasControlIRef.current.style.backgroundImage=`url(${imagenEstructurasControlI})`
+              const imagenEstructurasControlII = ruta.rutaSupabase; 
+              estructurasControlIIRef.current.style.backgroundImage=`url(${imagenEstructurasControlII})`
             }
           }
           )
@@ -137,14 +153,7 @@ return(
               </a>
               <div className="descripcion">
                 <div className="contenido">
-                  <p id="moduloDescripcion">Python es un lenguaje de programación de propósito general, interpretado y de código abierto, conocido por su sintaxis sencilla y 
-                    legible, ideal para principiantes y expertos. Se usa en una amplia variedad de campos, incluyendo el desarrollo web, ciencia de datos, inteligencia artificial, automatización y creación de software, debido a su versatilidad y a la gran 
-                    cantidad de bibliotecas disponibles. 
-                      ¿Qué es Python?
-                      Lenguaje de programación: Es un conjunto de instrucciones que los desarrolladores utilizan para decirle a las computadoras qué hacer. 
-                      Alto nivel y fácil de leer: Python se enfoca en la legibilidad, usando una sintaxis clara que requiere menos líneas de código que otros lenguajes. 
-                      Interpretado: El código se ejecuta línea por línea, lo que facilita la detección de errores. 
-                      De código abierto y multiparadigma: Es libre de usar y soporta varios estilos de programación, como la orientación a objetos y la programación imperativa. </p>
+                  <p id="moduloDescripcion">{descripcion}</p>
                 </div>
                 <p className="titulo">Introduccion</p>
               </div>
@@ -165,7 +174,7 @@ return(
               <div className="modulo" id="EstructurasDatosII" ref={estructurasDatosIIRef}  >
                 <div className="titulo-modulo">Estructuras de datos II</div>
               </div>
-              <div className="modulo" id="EstructurasControl" ref={estructurasControlRef}  >
+              <div className="modulo" id="EstructurasControlI" ref={estructurasControlIRef}  >
                 <div className="titulo-modulo">Estructuras de Control I</div>
               </div>
             </div>
@@ -173,7 +182,7 @@ return(
               <p className="etiqueta">Nivel 2 <strong id="nivel">(Intermedio)</strong> </p>
             </div>
             <div className="modulos">
-              <div className="introduccion modulo" >
+              <div className="introduccion modulo" id="EstructurasControlII" ref={estructurasControlIIRef} >
                 <div className="titulo-modulo">Estructuras de control II</div>
               </div>
               <div className="modulo" ></div>
