@@ -15,7 +15,7 @@ def verify_user_credentials(correo, contrasena_plana):
         resultados = ejecutar_consulta(query, [correo])
         
         if resultados and len(resultados) > 0:
-            usuario = resultados[0]  # Tomar el primer resultado            
+            usuario = resultados[0]  # Tomar el primer resultado
 
             if check_password_hash(usuario['contrasena'], contrasena_plana):
                 return usuario  # Credenciales correctas

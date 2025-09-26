@@ -130,7 +130,7 @@ from middleware.authMiddleware import login_required, get_current_user
 #--------------------------------------------------- Autenticación------------------------------------------------#
 app = Flask(__name__)
 app.secret_key ='innovemsennovacegafe2025'
-CORS(app)
+CORS(app, supports_credentials=True, origins=['http://localhost:5173'])
 
 @app.route('/api/auth/login', methods=['POST'])
 def login():
@@ -141,6 +141,9 @@ def login():
     user = verify_user_credentials(data['correo'], data['contrasena'])
     
     if user:
+        print (user)
+        session['user_id'] = user['idUsuarios']
+        session['username'] = user['nombre']
         session['email'] = user['correo']
         return jsonify({'true':True})
     else:
@@ -1478,4 +1481,5 @@ def eliminar_ruta_endpoint(id_ruta):
         return jsonify({'error': str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(port=5000, debug=True)  # Añade debug=True para ver errores
+    app.run(host='0.0.0.0', port=5000, debug=True)
+  # Añade debug=True para ver errores

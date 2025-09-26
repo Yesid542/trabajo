@@ -1,6 +1,9 @@
-import React, { useRef, useEffect} from "react";
+import React, { useRef, useEffect, useState} from "react";
 import "./paginaPrincipal.css";
-import { data } from "react-router-dom";
+import { data, UNSAFE_getTurboStreamSingleFetchDataStrategy } from "react-router-dom";
+import { supabase } from "../../../supabaseClient";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 function PaginaPrincipal(){
@@ -10,21 +13,56 @@ function PaginaPrincipal(){
   const estructurasDatosIIRef = useRef(null);
   const estructurasControlIRef = useRef(null);
   const estructurasControlIIRef = useRef(null);
-  const descripcion = '';
-  const reciente = document.getElementById("reciente");
-  const textoDescripcion = document.getElementById("moduloDescripcion");
-  const opciones = document.querySelectorAll(".modulo");
-
-  opciones.forEach(opcion =>{
-    opcion.addEventListener("click", ()=> {
-      reciente.style.backgroundImage = `url(${opcion.dataset.img})`;
-      textoDescripcion.textContent = opcion.dataset.texto;
-    });
-})
-
+  const funcionesRef = useRef(null);
+  const manejoDeStringsRef = useRef(null);
+  const saludoRef = useRef(null);
+  const manejoDeErroresRef = useRef(null);
+  const modulosYPaquetesRef = useRef(null);
+  const [contenidoSupabase, setContenidoSupabase] = useState(null);
   
-useEffect(() => {
+  
+useEffect(()=>{
+  async function verificarSesion() {
+    try {
+      const respuesta = await fetch('http://localhost:5000/api/auth/check', {
+        credentials: 'include' // ← importante si usas sesiones
+      })
+      const datos = await respuesta.json()
+      if (datos.user && saludoRef.current) {
+        saludoRef.current.textContent = "Hola "+ datos.user.username;
+      } else {
+        console.warn('Usuario no autenticado o datos incompletos');
+      }
+    
+    } catch (error) {
+      console.error('Error al autenticar:', error)
+    }
+  }
 
+verificarSesion();
+
+}, []);
+useEffect(() => {
+    async function obtenerTextos() {
+      const { data, error } = await supabase.from("descripciones").select("*");
+      if (error) {
+        console.error("Error al consultar:", error);
+      } else {
+        if (data.length>0) {
+          
+          setContenidoSupabase(data);
+        
+        }
+      }
+    }
+    obtenerTextos();
+}, []);
+
+
+    
+
+useEffect(() => {
+  
     fetch('http://127.0.0.1:5000/api/rutas')
     .then(respuesta => {
       if (!respuesta.ok) {
@@ -57,19 +95,53 @@ useEffect(() => {
               } 
             if(fundamentosRef.current && modulo.nombre == fundamentosRef.current.id){
               const imagenFundamentos = ruta.rutaSupabase; 
-              fundamentosRef.current.style.backgroundImage=`url(${imagenFundamentos})`
+              const fundamentos = document.getElementById("Fundamentos");
+              fundamentos.dataset.img = imagenFundamentos;
+              fundamentos.style.backgroundImage=`url(${fundamentos.dataset.img})`
               }
             if(estructurasDatosIRef.current && modulo.nombre == estructurasDatosIRef.current.id){
               const imagenEstructuraDatosI = ruta.rutaSupabase; 
-              estructurasDatosIRef.current.style.backgroundImage=`url(${imagenEstructuraDatosI})`
-              const imagenEstructuraDatosII = ruta.rutaSupabase; 
-              estructurasDatosIIRef.current.style.backgroundImage=`url(${imagenEstructuraDatosII})`
+              const estructurasDatosI = document.getElementById("Estructuras de datos l")
+              estructurasDatosI.dataset.img = imagenEstructuraDatosI;
+              estructurasDatosI.style.backgroundImage=`url(${estructurasDatosI.dataset.img})`
+              const estructurasDatosII = document.getElementById("Estructuras de datos ll")
+              estructurasDatosII.dataset.img = imagenEstructuraDatosI;
+              estructurasDatosII.style.backgroundImage=`url(${estructurasDatosII.dataset.img})`
               }
             if(estructurasControlIRef.current && modulo.nombre == estructurasControlIRef.current.id){
               const imagenEstructurasControlI = ruta.rutaSupabase; 
-              estructurasControlIRef.current.style.backgroundImage=`url(${imagenEstructurasControlI})`
-              const imagenEstructurasControlII = ruta.rutaSupabase; 
-              estructurasControlIIRef.current.style.backgroundImage=`url(${imagenEstructurasControlII})`
+              const estructurasControlI = document.getElementById("Estructuras de control l")
+              estructurasControlI.dataset.img = imagenEstructurasControlI;
+              estructurasControlI.style.backgroundImage=`url(${estructurasControlI.dataset.img})`
+              const estructurasControlII = document.getElementById("Estructuras de control ll")
+              estructurasControlII.dataset.img = imagenEstructurasControlI
+              estructurasControlII.style.backgroundImage=`url(${estructurasControlII.dataset.img})`
+              
+            }
+            if(funcionesRef.current && modulo.nombre == funcionesRef.current.id){
+              const imagenFunciones = ruta.rutaSupabase;
+              const funciones =document.getElementById("Funciones");
+              funciones.dataset.img =imagenFunciones;
+              funciones.style.backgroundImage=`url(${funciones.dataset.img})`
+            }
+            if(manejoDeStringsRef.current && modulo.nombre == manejoDeStringsRef.current.id){
+              const imagenManejoDeStrings = ruta.rutaSupabase;
+              const manejoDeStrings = document.getElementById("Manejo de strings")
+              manejoDeStrings.dataset.img = imagenManejoDeStrings;
+              manejoDeStrings.style.backgroundImage = `url(${manejoDeStrings.dataset.img})` 
+            }
+            if(manejoDeErroresRef.current && modulo.nombre == manejoDeErroresRef.current.id){
+              const imgManejoDeErrores = ruta.rutaSupabase;
+              const manejoDeErrores = document.getElementById("Manejo de errores");
+              manejoDeErrores.dataset.img = imgManejoDeErrores;
+              manejoDeErrores.style.backgroundImage = `url(${manejoDeErrores.dataset.img})`
+            }
+            if(modulosYPaquetesRef.current && modulo.nombre == modulosYPaquetesRef.current.id){
+              const imgModulosYPaquetes = ruta.rutaSupabase;
+              const modulosYPaquetes = document.getElementById("Modulos y paquetes");
+              modulosYPaquetes.dataset.img = imgModulosYPaquetes;
+              modulosYPaquetes.style.backgroundImage = `url(${modulosYPaquetes.dataset.img})`
+
             }
           }
           )
@@ -85,12 +157,50 @@ useEffect(() => {
       console.error("Error al obtener las rutas:", error);
     });
 
+    
+   }, []);  
+  
 
-  }, []);
-
+  
   
     
-  
+useEffect(()=>{
+  if (!contenidoSupabase) return;
+  const reciente = document.getElementById("reciente");
+  const tituloReciente = document.getElementById("tituloReciente");
+  const textoDescripcion = document.getElementById("moduloDescripcion");
+  const opciones = document.querySelectorAll(".modulo");
+
+
+  opciones.forEach(opcion => {
+    opcion.addEventListener("click", () => {
+      const img = opcion.dataset.img;
+      const titulo = opcion.id;
+      if (img) {
+        reciente.style.backgroundImage = `url(${img})`;
+      }
+      if(titulo) {
+        tituloReciente.textContent= titulo;
+        sessionStorage.setItem('modulo', titulo)
+      }
+      contenidoSupabase.forEach(item => {
+        if(titulo==item.modulo){
+        textoDescripcion.textContent=item.descripcion
+      }
+      });
+
+    });
+  });
+
+  // Limpieza de eventos al desmontar
+  return () => {
+    opciones.forEach(opcion => {
+      opcion.removeEventListener("click", () => {});
+    });
+  };
+
+}, [contenidoSupabase]);  
+
 
 return(
     <div className="cuerpo">
@@ -140,41 +250,41 @@ return(
             <button className="filtro" >Avanzado</button>
             <div className="Bienvenida">
               <img className="estrella-bienvenida" src="../../../public/ICONS/Estrella.svg" alt="Logo de la empresa" width="40" ></img>
-              <p className="saludo">Hola Cristiano</p>
+              <p className="saludo" ref={saludoRef}></p>
             </div>
             <div className="grupo">
-              <a href="">
-              <div className="reciente" id="reciente">
-                <div className="barra_progreso">
-                  <div className="progreso" style={{width: '60%'}}></div> 
+              <Link to={"/contenidos"}>
+                <div className="reciente" id="reciente">
+                  <div className="barra_progreso">
+                    <div className="progreso" style={{width: '60%'}}></div> 
+                  </div>
+                  <img className="estrella" src="../../../public/ICONS/Estrella.svg" alt="Logo de la empresa" width="100" ></img>
                 </div>
-                <img className="estrella" src="../../../public/ICONS/Estrella.svg" alt="Logo de la empresa" width="100" ></img>
-              </div>
-              </a>
+              </Link>
               <div className="descripcion">
                 <div className="contenido">
-                  <p id="moduloDescripcion">{descripcion}</p>
+                  <p id="moduloDescripcion"></p>
                 </div>
-                <p className="titulo">Introduccion</p>
+                <p className="titulo" id="tituloReciente"></p>
               </div>
             </div>
             <div className="etiquetas">
               <p className="etiqueta">Nivel 1 <strong id="nivel">(Basico)</strong> </p>
             </div>
             <div className="modulos">
-              <div className="introduccion modulo" id="Introduccion" ref={introduccionRef}>
+              <div className="inicial modulo" id="Introduccion" ref={introduccionRef}>
                 <div className="titulo-modulo">Introduccion</div>
               </div>
               <div className="modulo" id="Fundamentos" ref={fundamentosRef} >
                 <div className="titulo-modulo">Fundamentos del lenguaje</div>
               </div>
-              <div className="modulo" id="EstructurasDatosI" ref={estructurasDatosIRef} >
+              <div className="modulo" id="Estructuras de datos l" ref={estructurasDatosIRef} >
                 <div className="titulo-modulo">Estructuras de datos I</div>
               </div>
-              <div className="modulo" id="EstructurasDatosII" ref={estructurasDatosIIRef}  >
+              <div className="modulo" id="Estructuras de datos ll" ref={estructurasDatosIIRef}  >
                 <div className="titulo-modulo">Estructuras de datos II</div>
               </div>
-              <div className="modulo" id="EstructurasControlI" ref={estructurasControlIRef}  >
+              <div className="modulo" id="Estructuras de control l" ref={estructurasControlIRef}  >
                 <div className="titulo-modulo">Estructuras de Control I</div>
               </div>
             </div>
@@ -182,19 +292,27 @@ return(
               <p className="etiqueta">Nivel 2 <strong id="nivel">(Intermedio)</strong> </p>
             </div>
             <div className="modulos">
-              <div className="introduccion modulo" id="EstructurasControlII" ref={estructurasControlIIRef} >
+              <div className="inicial modulo" id="Estructuras de control ll" ref={estructurasControlIIRef} >
                 <div className="titulo-modulo">Estructuras de control II</div>
               </div>
-              <div className="modulo" ></div>
-              <div className="modulo" ></div>
-              <div className="modulo" ></div>
-              <div className="modulo" ></div>
+              <div className="modulo" id="Funciones" ref={funcionesRef}>
+                <div className="titulo-modulo">Funciones</div>
+              </div>
+              <div className="modulo" id="Manejo de strings" ref={manejoDeStringsRef}>
+                 <div className="titulo-modulo">Manejo de Strings</div>
+              </div>
+              <div className="modulo" id="Manejo de errores" ref={manejoDeErroresRef}>
+                <div className="titulo-modulo">Manejo de errores</div>
+              </div>
+              <div className="modulo" id="Modulos y paquetes" ref={modulosYPaquetesRef}>
+                <div className="titulo-modulo">Modulos y paquetes</div>
+              </div>
             </div>
             <div className="etiquetas">
               <p className="etiqueta">Nivel 3 <strong id="nivel">(Avanzado)</strong> </p>
             </div>
             <div className="modulos">
-              <div className="introduccion modulo" >
+              <div className="inicial modulo" >
                 <div className="titulo-modulo">Introduccion</div>
               </div>
               <div className="modulo" ></div>

@@ -4,7 +4,8 @@ import React from 'react';
 import IniciaSesion from './components/inicioSesion/inicioSesion';
 import LogoInicio from './components/logoInicio/logoInicio';
 import Registro from './components/registro/registrarse';
-import Principal from './components/principal/paginaPrincipal'
+import Principal from './components/principal/paginaPrincipal';
+import Contenidos from './components/contenido/contenido';
 import './App.css'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
          <Route path="/" element={<IniciaSesion/>}/>
          <Route path="/registrar" element={<Registro/>}/>
          <Route path='/principal' element={<Principal/>}/>
+         <Route path='/contenidos' element={<Contenidos/>}/>
        </Routes>
     </BrowserRouter>
 

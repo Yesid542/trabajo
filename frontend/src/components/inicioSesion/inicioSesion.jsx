@@ -12,11 +12,12 @@ const navigate = useNavigate();
 const iniciarSesion = async(email,password)=>{
   
    try{
-      const servidor = await fetch(`http://127.0.0.1:5000/api/auth/login`,{
+      const servidor = await fetch(`http://localhost:5000/api/auth/login`,{
         method:'POST',
         headers:{
           'Content-Type':'application/json',
         },
+        credentials: 'include', 
         body:JSON.stringify({
           correo:email,
           contrasena:password})
@@ -26,7 +27,7 @@ const iniciarSesion = async(email,password)=>{
          navigate('./principal')
        }
        if(data.false){
-         console.log("Paila socio")
+         console.log("Algo salio mal")
        }
     
 
