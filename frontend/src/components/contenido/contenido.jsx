@@ -3,12 +3,14 @@ import { useState, useRef, useEffect} from "react";
 import { supabase } from "../../../supabaseClient";
 import './contenido.css';
 import { data } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 function contenido(){
 
     const [temas, setTemas] = useState([]);
     const [contenidoSupabase, setContenidoSupabase] = useState(null);
+    const [contenido_temas, setContenidoTemas] = useState([]);
 
 
     const [activo, setActivo] = useState(false);
@@ -44,7 +46,7 @@ function contenido(){
 
 
   const modulo = sessionStorage.getItem('modulo');
-  console.log(modulo)
+
   
 useEffect(() => {
   
@@ -56,12 +58,16 @@ useEffect(() => {
       } else {
         if (data.length>0) { 
           setContenidoSupabase(data);
-          setTemas(data.map(item => item.titulo))
+          setTemas(data.sort((a, b) => a.idContenido - b.idContenido)
+.map(tema => tema.titulo))
+          setContenidoTemas(data)
+          console.log(data)
         }
       }
     }
     obtenerContenido();
 }, []);
+
 
 
 
@@ -73,7 +79,7 @@ useEffect(()=>{
         title.textContent = modulo
       }
     });
-
+console.log(contenido_temas)
 },[contenidoSupabase]);
 
     return(
@@ -112,7 +118,7 @@ useEffect(()=>{
             <main className="content">
                 <div className="figura-titulo">
                     <div className="figura">
-                        <svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" height='30.6vh' viewBox="0 0 1218.12 190.22">
+                        <svg id="svgGrande" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" height='30.6vh' viewBox="0 0 1218.12 190.22">
                       <g id="Capa_1-2" data-name="Capa 1">
                         <path className="cls-301" d="M1519.81,167.67c-.21.16-.44.31-.67.45-21.31,12.56-110.85-15.26-136.14-17.62-26.86-2.5-54.49-.15-80.98,3.32-66.21,8.66-129.04,24.2-196.16,30.58-79.02,7.51-161.17,1.9-237.27-11.7-54.42-9.72-108.58-23.68-165.89-22.05-48,1.37-92.14,13.56-137.43,22.14-95.42,18.09-201.19,20.34-299.02,6.35-39.91-5.71-78.76-14.06-119.8-16.63-33.49-2.1-67.25-.23-100.35,2.73-22.01,1.96-42.71,8.56-44-5.87-4.72-52.87,0-106.43,0-159.38h1519.11c0,7.94,0,15.88,0,23.81,0,34.82,0,69.64,0,104.46,0,7.27,7.4,32.78-1.4,39.39Z"/>
                       </g>
@@ -122,7 +128,25 @@ useEffect(()=>{
                     
                 </div>
 
-                <div className="contenidos"></div>
+                {Object.entries(contenido_temas)
+                .sort(([, a], [, b]) => a.idContenido - b.idContenido)
+                .map(([clave, tema], indexs) => (
+                <div
+                  key={indexs}
+                  className="contenidos"
+                  style={{
+                    top: `${indexs * 200}px`, // separa verticalmente cada bloque
+                    position: 'absolute',
+                    width: '80vw',
+                    marginLeft: '10vw'
+                  }}
+                >
+                  <h3 style={{display:"flex",justifyContent:"center"}} >{tema.titulo}</h3>
+                  <p>{tema.contenido}</p>
+                </div>
+              ))}
+
+
                 <div className="barra-navegacion">
                     <div className="boton-izquierdo">
                         <svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" width='40px' viewBox="0 0 10.1 6.03">
@@ -150,6 +174,12 @@ useEffect(()=>{
                 </div>
             </main>
             <div ref={slidebarRef} className={`slidebar ${activo ? 'activa' : ''}`}>
+              <div className="slideNav">
+                <Link to={"/principal"}> 
+                  <img className="slideHome" src="../../../public/ICONS/slideHome.svg"  alt="" />
+                  <span className="linea">___________</span>
+                </Link>
+              </div>
                 {temas.map((tema, index) => (
                   <div key={index} className="nav">{tema}</div>
                     ))}
