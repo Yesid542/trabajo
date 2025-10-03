@@ -1,0 +1,33 @@
+{
+  "name": "electron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "27.2.0",
+    "electron-builder": "26.0.12"
+  },
+  "build": {
+    "appId": "com.yesid.serkana",
+    "productName":"Serkana",
+  "directories": {
+    "output": "../build"
+  },
+  "files": [
+    "**/*"
+  ],
+    "win": {
+      "target": "nsis",
+      "icon":"./App.ico",
+      "forceCodeSigning": false
+    }
+  }
+}

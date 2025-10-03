@@ -1,7 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './logoInicio.css'
+import { useNavigate } from 'react-router-dom';
+
 
 function logoInicio(){
+  const navigate = useNavigate();
+   useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate('/inicia');
+    }, 3000); // 3 segundos de pantalla de carga
+
+    return () => clearTimeout(timer); // Limpieza del temporizador
+  }, [navigate]);
 
     return(
     <div className='principal'>

@@ -1,11 +1,19 @@
-const { app, BrowserWindow,Menu } = require('electron')
-const path = require('path')
+const { spawn } = require('child_process');
+const { app, BrowserWindow, Menu } = require('electron');
+const path = require('path');
 
-let mainWindow
+let mainWindow;
 
 function createWindow() {
+  const iconPath = path.join(__dirname, '../frontend/public/App.ico');
+  const backendPath = path.join(__dirname, '../backend/server.py');
 
-  const iconPath = path.join(__dirname, '../frontend/public/App.ico')
+  const pythonProcess = spawn('python', [backendPath], {
+    detached: true,
+    stdio: 'ignore'
+  });
+  pythonProcess.unref();
+
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
@@ -13,16 +21,13 @@ function createWindow() {
       nodeIntegration: false,
       contextIsolation: true,
     },
-
     icon: iconPath
-  })
+  });
 
-
-
-  // Cargar el frontend de Vite en desarrollo
-  mainWindow.loadURL('http://localhost:5173')
+  // Cargar frontend (elige solo una opción según el entorno)
+  mainWindow.loadFile(path.join(__dirname, './dist/index.html'));
+  mainWindow.loadFile(path.join(__dirname, '../frontend/dist/index.html'));
 
 }
 
-
-app.whenReady().then(createWindow)
+app.whenReady().then(createWindow);
